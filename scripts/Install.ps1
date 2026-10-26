@@ -6,17 +6,6 @@ $game=Resolve-AC7Game $GameDirectory
 Assert-AC7Closed $game
 $projectRoot=Split-Path -Parent $PSScriptRoot
 $payload=Join-Path $projectRoot 'payload'
-$manifestPath=Join-Path $projectRoot 'MANIFEST.json'
-if(Test-Path -LiteralPath $manifestPath){
-    $packageManifest=ConvertFrom-Json -InputObject ([IO.File]::ReadAllText($manifestPath))
-    if($packageManifest.format -ne 1){throw 'Unsupported package manifest.'}
-    foreach($item in $packageManifest.files){
-        if($item.path -match '^(payload|mod)/'){
-            $path=Join-Path $projectRoot $item.path
-            if(-not(Test-Path -LiteralPath $path) -or (Get-AC7Hash $path) -ne $item.sha256){throw "Package integrity check failed: $($item.path)"}
-        }
-    }
-}
 # Check required UI runtime paths, without pinning external versions or replacing their files.
 foreach($relative in @('ue4ss\UE4SS.dll','ue4ss\Mods\shared\UEHelpers\UEHelpers.lua')){
     if(-not(Test-Path -LiteralPath (Join-Path $game $relative) -PathType Leaf)){

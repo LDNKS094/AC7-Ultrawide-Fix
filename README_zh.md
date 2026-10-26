@@ -49,7 +49,7 @@ ACE COMBAT 7/
 .\Install.cmd -GameDirectory 'D:\Games\ACE COMBAT 7'
 ```
 
-安装器会校验补丁文件、检查 UE4SS/UEHelpers 路径、复制 ASI 与 Lua，并合并模组列表。
+安装器会检查 UE4SS/UEHelpers 路径、复制 ASI 与 Lua，并合并模组列表。
 
 ### 卸载
 

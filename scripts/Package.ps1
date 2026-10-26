@@ -22,17 +22,10 @@ try{
     foreach($name in @('AC7SceneProjection.asi','AC7HUDCenter.asi')){
         Copy-Item -LiteralPath (Join-Path $root ('payload\'+$name)) -Destination $native
     }
-    $inventory=@(Get-ChildItem -LiteralPath $stage -File -Recurse | Sort-Object FullName | ForEach-Object {
-        [ordered]@{path=$_.FullName.Substring($stage.Length+1).Replace('\','/');bytes=$_.Length;sha256=Get-AC7Hash $_.FullName}
-    })
-    $manifest=[ordered]@{format=1;package=$release.package;version=$release.version;files=$inventory}
-    $json=ConvertTo-Json -InputObject $manifest -Depth 20
-    Write-AC7Utf8 (Join-Path $stage 'MANIFEST.json') $json
-    Write-AC7Utf8 (Join-Path $root 'MANIFEST.json') $json
     $archive=Join-Path $OutputDirectory ($release.package+'-'+$release.version+'.zip')
     Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $archive -Force -CompressionLevel Optimal
     Write-AC7Utf8 ($archive+'.sha256') ((Get-AC7Hash $archive)+'  '+(Split-Path -Leaf $archive)+"`n")
-    Write-Output "Package: $archive ($((Get-Item -LiteralPath $archive).Length) bytes, $($inventory.Count+1) files)"
+    Write-Output "Package: $archive ($((Get-Item -LiteralPath $archive).Length) bytes)"
 }finally{
     if(Test-Path -LiteralPath $stage){Remove-Item -LiteralPath $stage -Recurse -Force}
 }

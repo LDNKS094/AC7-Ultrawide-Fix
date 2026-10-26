@@ -49,7 +49,7 @@ The installer locates Steam libraries automatically; if none is found, specify t
 .\Install.cmd -GameDirectory 'D:\Games\ACE COMBAT 7'
 ```
 
-The installer verifies the patch files, checks the UE4SS/UEHelpers paths, copies the ASI plugins and Lua scripts and merges the mod lists.
+The installer checks the UE4SS/UEHelpers paths, copies the ASI plugins and Lua scripts and merges the mod lists.
 
 ### Uninstall
 

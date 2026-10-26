@@ -8,4 +8,4 @@ if($LASTEXITCODE){throw 'CMake configure failed.'}
 if($LASTEXITCODE){throw 'Native build failed.'}
 $output=if($Configuration -eq 'Release'){Join-Path $projectRoot 'payload'}else{Join-Path $build $Configuration}
 Write-Output "Build passed. Native outputs: $output"
-Write-Output 'Run scripts/Package.ps1 to regenerate the installation package and file manifest.'
+Write-Output 'Run scripts/Package.ps1 when you need an installation ZIP.'
