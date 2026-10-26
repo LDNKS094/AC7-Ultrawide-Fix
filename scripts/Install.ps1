@@ -66,8 +66,7 @@ foreach($relative in @('ac7ultrawide.asi','ac7projectionprobe.asi')){
         $records+=,[ordered]@{path=$relative;existed=$true;action='remove';installedSha256=$null}
     }
 }
-$manifest=[ordered]@{format=1;game=$game;exeSha256=Get-AC7Hash (Join-Path $game 'Ace7Game.exe');files=$records}
-Write-AC7Utf8 (Join-Path $backup 'manifest.json') (ConvertTo-Json -InputObject $manifest -Depth 20)
+$exeHash=Get-AC7Hash (Join-Path $game 'Ace7Game.exe')
 $done=@()
 try{
     foreach($record in $records){
@@ -81,18 +80,23 @@ try{
             if((Get-AC7Hash $target) -ne $record.installedSha256){throw "Copy verification failed: $($record.path)"}
         }
     }
-    if((Get-AC7Hash (Join-Path $game 'Ace7Game.exe')) -ne $manifest.exeSha256){throw 'Unexpected executable change.'}
+    if((Get-AC7Hash (Join-Path $game 'Ace7Game.exe')) -ne $exeHash){throw 'Unexpected executable change.'}
 }catch{
     $failure=$_
     for($index=$done.Count-1;$index -ge 0;$index--){
         $record=$done[$index];$target=Join-Path $game $record.path
-        if($record.existed){Copy-Item -LiteralPath (Join-Path $backup ('original\'+$record.path)) -Destination $target -Force}
-        elseif(Test-Path -LiteralPath $target){Remove-Item -LiteralPath $target}
+        try{
+            if($record.existed){
+                $saved=Join-Path $backup ('original\'+$record.path)
+                if((Test-Path -LiteralPath $target -PathType Leaf) -and (Get-AC7Hash $target) -eq (Get-AC7Hash $saved)){continue}
+                Copy-Item -LiteralPath $saved -Destination $target -Force
+            }elseif(Test-Path -LiteralPath $target){Remove-Item -LiteralPath $target -Force}
+        }catch{Write-Warning "Could not restore $($record.path); its backup is in $backup"}
     }
+    Write-Warning "Installation failed; recovery files retained at: $backup"
     throw $failure
 }
-Write-AC7Utf8 (Join-Path $projectRoot '.local-state\latest-backup.txt') ($backup.Substring($projectRoot.Length+1))
 Write-AC7Utf8 (Join-Path $projectRoot '.local-state\game-directory.txt') $game
+Remove-AC7TemporaryBackup $backup
 Write-Output "Installed latest package to: $game"
-Write-Output "Backup: $backup"
 Write-Output 'External loaders, UE4SS, settings, input bindings and game assets were preserved.'

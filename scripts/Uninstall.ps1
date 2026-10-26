@@ -59,8 +59,10 @@ try{
             Copy-Item -LiteralPath $saved -Destination $target -Recurse -Force
         }catch{Write-Warning "Could not restore $relative; its backup is in $backup"}
     }
+    Write-Warning "Uninstall failed; recovery files retained at: $backup"
     throw $failure
 }
+Remove-AC7TemporaryBackup $backup
 Write-Output "Uninstalled patch from: $game"
 Write-Output 'Patch files and mod-list entries removed. Previous patch versions were not restored.'
 Write-Output 'External dependencies, other mods, game assets, saves and input bindings were preserved.'

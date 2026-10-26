@@ -30,6 +30,13 @@ function Assert-AC7Closed([string]$GameDirectory){
         }
     }
 }
+function Remove-AC7TemporaryBackup([string]$Path){
+    try{
+        Remove-Item -LiteralPath $Path -Recurse -Force
+        $parent=Split-Path -Parent $Path
+        if(@(Get-ChildItem -LiteralPath $parent -Force).Count -eq 0){Remove-Item -LiteralPath $parent}
+    }catch{Write-Warning "Operation succeeded, but temporary backup cleanup failed: $Path"}
+}
 function Get-AC7Hash([string]$Path){return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash}
 function Write-AC7Utf8([string]$Path,[string]$Content){
     $parent=Split-Path -Parent $Path
