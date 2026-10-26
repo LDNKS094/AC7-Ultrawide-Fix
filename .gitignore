@@ -1,0 +1,8 @@
+/development/
+/build/
+/.venv/
+/.local-state/
+/backups/
+/releases/
+__pycache__/
+*.log

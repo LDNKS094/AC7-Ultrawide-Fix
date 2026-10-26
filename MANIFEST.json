@@ -1,0 +1,77 @@
+{
+    "format":  1,
+    "package":  "AC7-Ultrawide-Fix",
+    "version":  "1.2.1",
+    "files":  [
+                  {
+                      "path":  "Install.cmd",
+                      "bytes":  105,
+                      "sha256":  "DD01B76EC68308B648972B31E15383EA830FD09C025B4FFD83D78F265F2A2FC6"
+                  },
+                  {
+                      "path":  "licenses/DXBC-hash-LICENSE.txt",
+                      "bytes":  29241,
+                      "sha256":  "27A49E35D1DA96EBA18FBA54BC882667FF0FF8C0254F16F2B6E165D605BA7DF8"
+                  },
+                  {
+                      "path":  "licenses/MinHook-AUTHORS.txt",
+                      "bytes":  214,
+                      "sha256":  "073B4E8B0A5A0CD9F4DFA838369F4FC7A4F47151D930B4E1FD891644060A897F"
+                  },
+                  {
+                      "path":  "licenses/MinHook-LICENSE.txt",
+                      "bytes":  4365,
+                      "sha256":  "D5C2224982B0B95A16B098A561335FA93F3EAF4D0AA964B7843EDB986DF78DC8"
+                  },
+                  {
+                      "path":  "mod/AC7UIAspect/Scripts/loading_geometry.lua",
+                      "bytes":  2150,
+                      "sha256":  "912416CC76BE8C858CD08D72AC07E5CE5119D9CE243DAF0ADD1B66842167092E"
+                  },
+                  {
+                      "path":  "mod/AC7UIAspect/Scripts/main.lua",
+                      "bytes":  4609,
+                      "sha256":  "FAC1D019954EF53CD28F9B66F40BF8BEA1C32B09AA6AA8C1084CE37935830769"
+                  },
+                  {
+                      "path":  "mod/AC7UIAspect/Scripts/overlay_geometry.lua",
+                      "bytes":  3461,
+                      "sha256":  "05AA440598FCC37887FE13E02489A736B5EBC18625DAF6E04AC1A9CCEB32728D"
+                  },
+                  {
+                      "path":  "payload/AC7HUDCenter.asi",
+                      "bytes":  349184,
+                      "sha256":  "00F080B1D187980677636D7CD735F4B2990815C334C8323B79DCB312F29BF152"
+                  },
+                  {
+                      "path":  "payload/AC7SceneProjection.asi",
+                      "bytes":  293888,
+                      "sha256":  "7BA57519CEA74E20E9A2D781C1A2D6C8DAA11107C58CE508786462971C87CDCC"
+                  },
+                  {
+                      "path":  "README.md",
+                      "bytes":  3229,
+                      "sha256":  "978EE94BD181FB11F65BC34770692E2BF66294174B39265C0407353C2350F8F0"
+                  },
+                  {
+                      "path":  "scripts/Common.ps1",
+                      "bytes":  2060,
+                      "sha256":  "EEF0B196256FE72A9CFF0B035E1A4AAD90B253E5EFC72F3E7918DEB844653445"
+                  },
+                  {
+                      "path":  "scripts/Install.ps1",
+                      "bytes":  5978,
+                      "sha256":  "22E6051EFBAC6D5E7028EF0601598D199C5E851EAE3E1C813845701CA1E79399"
+                  },
+                  {
+                      "path":  "scripts/Uninstall.ps1",
+                      "bytes":  2360,
+                      "sha256":  "27A55FEE06021F4BB1EF0CD0C080F5A5FFB6F3F3D1E2E9154AE2C4E73BD88E56"
+                  },
+                  {
+                      "path":  "Uninstall.cmd",
+                      "bytes":  107,
+                      "sha256":  "A6F9C039E46A3886ED3CDED2D75D01919482FB1FFCA0D3CD3B8FF35416E706A8"
+                  }
+              ]
+}
