@@ -93,3 +93,25 @@ AC7UIAspect : 1
 Delete the two ASI plugins and `ue4ss/Mods/AC7UIAspect/` you copied, then restore the backed-up files and both mod lists.
 
 > `Uninstall.cmd` relies on the install records created by `Install.cmd`. For a manual install, uninstall manually from your own backups.
+
+## Building from source
+
+Requirements: Windows x64, Visual Studio 2022 (or Build Tools) with the "Desktop development with C++" workload and Windows SDK, CMake 3.20+.
+
+Run from the project root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Build.ps1
+```
+
+The script configures an x64 project and builds in Release.
+
+Output:
+
+```text
+payload/
+  AC7SceneProjection.asi
+  AC7HUDCenter.asi
+```
+
+Once built, install the patch as usual.

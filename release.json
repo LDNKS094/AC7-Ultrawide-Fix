@@ -1,8 +1,4 @@
 {
   "package": "AC7-Ultrawide-Fix",
-  "version": "1.2.1",
-  "referenceBinaries": {
-    "AC7SceneProjection.asi": "7ba57519cea74e20e9a2d781c1a2d6c8daa11107c58ce508786462971c87cdcc",
-    "AC7HUDCenter.asi": "00f080b1d187980677636d7cd735f4b2990815c334c8323b79dcb312f29bf152"
-  }
+  "version": "1.2.1"
 }

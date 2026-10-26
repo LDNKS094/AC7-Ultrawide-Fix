@@ -93,3 +93,25 @@ AC7UIAspect : 1
 删除复制的两个 ASI 与 `ue4ss/Mods/AC7UIAspect/`，还原备份文件与两份模组列表。
 
 > `Uninstall.cmd` 依赖 `Install.cmd` 生成的安装记录，手动安装请按手动备份卸载。
+
+## 从源码构建
+
+环境：Windows x64，Visual Studio 2022（或 Build Tools）带“使用 C++ 的桌面开发”工作负载与 Windows SDK，CMake 3.20+。
+
+在项目根目录执行：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Build.ps1
+```
+
+脚本会配置 x64 工程并以 Release 编译。
+
+产物：
+
+```text
+payload/
+  AC7SceneProjection.asi
+  AC7HUDCenter.asi
+```
+
+编译后即可按照常规安装方式使用。

@@ -41,17 +41,22 @@
                   {
                       "path":  "payload/AC7HUDCenter.asi",
                       "bytes":  349184,
-                      "sha256":  "00F080B1D187980677636D7CD735F4B2990815C334C8323B79DCB312F29BF152"
+                      "sha256":  "447C0338245C631655DE1B6FFC1647EE0106DF02E4967BDB576468D1AC9DAAD2"
                   },
                   {
                       "path":  "payload/AC7SceneProjection.asi",
                       "bytes":  293888,
-                      "sha256":  "7BA57519CEA74E20E9A2D781C1A2D6C8DAA11107C58CE508786462971C87CDCC"
+                      "sha256":  "A1CAE2643E068C2F73251EC42B6F546EFC3A6D2071713DEDF8271783CCD34944"
                   },
                   {
                       "path":  "README.md",
-                      "bytes":  3229,
-                      "sha256":  "978EE94BD181FB11F65BC34770692E2BF66294174B39265C0407353C2350F8F0"
+                      "bytes":  3693,
+                      "sha256":  "E2444371B65DBCCEA925D3C78196CB9758ECAB31F94EF357A5797C01E68CE8CF"
+                  },
+                  {
+                      "path":  "README_zh.md",
+                      "bytes":  3333,
+                      "sha256":  "50244F7E812266B738C572DFA6BCEA9FAE7231DACE480E4447E07C134EE6B003"
                   },
                   {
                       "path":  "scripts/Common.ps1",

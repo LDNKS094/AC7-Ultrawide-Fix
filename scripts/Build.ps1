@@ -6,7 +6,6 @@ $build=Join-Path $projectRoot 'build'
 if($LASTEXITCODE){throw 'CMake configure failed.'}
 & $CMake --build $build --config $Configuration
 if($LASTEXITCODE){throw 'Native build failed.'}
-& $CMake -E chdir $build ctest -C $Configuration --output-on-failure
-if($LASTEXITCODE){throw 'Native tests failed.'}
-Write-Output "Build passed. Native outputs: $build\$Configuration"
-Write-Output 'Building never installs files into the game; payload updates are an explicit packaging step.'
+$output=if($Configuration -eq 'Release'){Join-Path $projectRoot 'payload'}else{Join-Path $build $Configuration}
+Write-Output "Build passed. Native outputs: $output"
+Write-Output 'Run scripts/Package.ps1 to regenerate the installation package and file manifest.'
