@@ -103,6 +103,7 @@ try{
     throw $failure
 }
 Write-AC7Utf8 (Join-Path $projectRoot '.local-state\latest-backup.txt') ($backup.Substring($projectRoot.Length+1))
-Write-Output "Installed to: $game"
+Write-AC7Utf8 (Join-Path $projectRoot '.local-state\game-directory.txt') $game
+Write-Output "Installed latest package to: $game"
 Write-Output "Backup: $backup"
 Write-Output 'External loaders, UE4SS, settings, input bindings and game assets were preserved.'

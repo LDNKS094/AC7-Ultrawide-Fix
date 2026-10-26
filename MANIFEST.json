@@ -1,7 +1,7 @@
 {
     "format":  1,
     "package":  "AC7-Ultrawide-Fix",
-    "version":  "1.2.1",
+    "version":  "1.2.2",
     "files":  [
                   {
                       "path":  "Install.cmd",
@@ -55,8 +55,8 @@
                   },
                   {
                       "path":  "README_zh.md",
-                      "bytes":  3333,
-                      "sha256":  "50244F7E812266B738C572DFA6BCEA9FAE7231DACE480E4447E07C134EE6B003"
+                      "bytes":  3683,
+                      "sha256":  "B65D4C24727A626EAD4EE173D8167F59F2C70F86D7C63EBBB0E9245BA1D1B228"
                   },
                   {
                       "path":  "scripts/Common.ps1",
@@ -65,13 +65,13 @@
                   },
                   {
                       "path":  "scripts/Install.ps1",
-                      "bytes":  5978,
-                      "sha256":  "22E6051EFBAC6D5E7028EF0601598D199C5E851EAE3E1C813845701CA1E79399"
+                      "bytes":  6072,
+                      "sha256":  "6E657F7A5FCC4D64509A15F74CF4A9F2E6DB5361928D74706B96162C5CA743AE"
                   },
                   {
                       "path":  "scripts/Uninstall.ps1",
-                      "bytes":  2360,
-                      "sha256":  "27A55FEE06021F4BB1EF0CD0C080F5A5FFB6F3F3D1E2E9154AE2C4E73BD88E56"
+                      "bytes":  4015,
+                      "sha256":  "7F5F70F51CAB4FCAECFC4DB799B3CE7D849276749628DD736D3EE7F12A779ACB"
                   },
                   {
                       "path":  "Uninstall.cmd",

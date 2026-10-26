@@ -38,33 +38,32 @@ ACE COMBAT 7/
 
 ## Option 1: Script install
 
-1. Install the dependencies above.
+1. Install the external dependencies above.
 2. Extract this patch and run `Install.cmd`.
 3. Launch the game from Steam.
 
-The installer locates Steam libraries automatically. If none or several are found, specify the game folder:
+The installer locates Steam libraries automatically; if none is found, specify the game folder:
 
 ```powershell
 .\Install.cmd -GameDirectory 'D:\Games\ACE COMBAT 7'
 ```
 
-The installer verifies the patch files, checks the UE4SS/UEHelpers paths, copies the ASI plugins and Lua scripts, merges the mod lists and backs up every file it modifies. Install records are kept in `backups/` and `.local-state/` inside the tool folder.
+The installer verifies the patch files, checks the UE4SS/UEHelpers paths, copies the ASI plugins and Lua scripts and merges the mod lists.
 
 ### Uninstall
 
-Run `Uninstall.cmd` to restore the state from before that install; external dependencies are left in place:
+Run `Uninstall.cmd`; it removes only the files this patch added directly and its mod-list entries.
+
+To specify the folder:
 
 ```powershell
 .\Uninstall.cmd -GameDirectory 'G:\Games\ACE COMBAT 7'
 ```
 
-If patch files were modified after installation, the uninstaller lists the conflicts and stops.
-
 ## Option 2: Manual install
 
-1. Install the dependencies above.
-2. Back up any same-named files already present at the target locations, plus `ue4ss/Mods/mods.txt` and `ue4ss/Mods/mods.json`.
-3. Copy the patch files:
+1. Close the game and install the dependencies above.
+2. Copy the patch files:
 
 | File in this package | Copy to |
 | --- | --- |
@@ -72,13 +71,13 @@ If patch files were modified after installation, the uninstaller lists the confl
 | `payload/AC7HUDCenter.asi` | Game root |
 | `mod/AC7UIAspect/` | `ue4ss/Mods/AC7UIAspect/` |
 
-4. Add this line to `ue4ss/Mods/mods.txt`, keeping other entries:
+3. Add or update this in `ue4ss/Mods/mods.txt`, keeping other entries:
 
 ```text
 AC7UIAspect : 1
 ```
 
-5. Add or update the entry in `ue4ss/Mods/mods.json`:
+4. Add or update the entry in `ue4ss/Mods/mods.json`:
 
 ```json
 [
@@ -86,13 +85,20 @@ AC7UIAspect : 1
 ]
 ```
 
-6. Launch the game from Steam.
+5. Launch the game from Steam.
 
 ### Manual uninstall
 
-Delete the two ASI plugins and `ue4ss/Mods/AC7UIAspect/` you copied, then restore the backed-up files and both mod lists.
+Close the game and delete these files and folders:
 
-> `Uninstall.cmd` relies on the install records created by `Install.cmd`. For a manual install, uninstall manually from your own backups.
+- `AC7SceneProjection.asi`
+- `AC7HUDCenter.asi`
+- `AC7SceneProjection.log`, `AC7HUDCenter.log` (if present)
+- `ue4ss/Mods/AC7UIAspect/`
+
+Then remove the `AC7UIAspect` entries from `ue4ss/Mods/mods.txt` and `ue4ss/Mods/mods.json`.
+
+External dependencies do not need to be removed if other mods still use them.
 
 ## Building from source
 
@@ -104,7 +110,7 @@ Run from the project root:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Build.ps1
 ```
 
-The script configures an x64 project and builds in Release.
+The script configures an x64 project and builds it in Release.
 
 Output:
 

@@ -38,33 +38,32 @@ ACE COMBAT 7/
 
 ## 方式一：脚本安装
 
-1. 安装好上述依赖。
+1. 安装上述外部依赖。
 2. 解压本补丁，运行 `Install.cmd`。
 3. 从 Steam 启动游戏。
 
-安装器会自动查找 Steam 库；找不到或存在多份时手动指定游戏目录：
+安装器会自动查找 Steam 库；找不到时手动指定游戏目录：
 
 ```powershell
 .\Install.cmd -GameDirectory 'D:\Games\ACE COMBAT 7'
 ```
 
-安装器会校验补丁文件、检查 UE4SS/UEHelpers 路径、复制 ASI 与 Lua、合并模组列表，并备份被修改的文件。安装记录保存在工具目录的 `backups/` 与 `.local-state/`。
+安装器会校验补丁文件、检查 UE4SS/UEHelpers 路径、复制 ASI 与 Lua，并合并模组列表。
 
 ### 卸载
 
-运行 `Uninstall.cmd`，恢复到本次安装前的状态（外部依赖保留）：
+运行 `Uninstall.cmd`，仅移除本补丁直接添加的文件与模组列表条目。
+
+需要指定目录时：
 
 ```powershell
 .\Uninstall.cmd -GameDirectory 'G:\Games\ACE COMBAT 7'
 ```
 
-若安装后相关文件被改动过，卸载会列出冲突并停止。
-
 ## 方式二：手动安装
 
-1. 安装好上述依赖。
-2. 备份目标位置已存在的同名文件及 `ue4ss/Mods/mods.txt`、`ue4ss/Mods/mods.json`。
-3. 复制补丁文件：
+1. 退出游戏，装好上述依赖。
+2. 复制补丁文件：
 
 | 本包文件 | 复制到 |
 | --- | --- |
@@ -72,13 +71,13 @@ ACE COMBAT 7/
 | `payload/AC7HUDCenter.asi` | 游戏根目录 |
 | `mod/AC7UIAspect/` | `ue4ss/Mods/AC7UIAspect/` |
 
-4. 在 `ue4ss/Mods/mods.txt` 中添加（保留其他条目）：
+3. 在 `ue4ss/Mods/mods.txt` 中添加或更新（保留其他条目）：
 
 ```text
 AC7UIAspect : 1
 ```
 
-5. 在 `ue4ss/Mods/mods.json` 中添加或更新条目：
+4. 在 `ue4ss/Mods/mods.json` 中添加或更新条目：
 
 ```json
 [
@@ -86,13 +85,20 @@ AC7UIAspect : 1
 ]
 ```
 
-6. 从 Steam 启动游戏。
+5. 从 Steam 启动游戏。
 
 ### 手动卸载
 
-删除复制的两个 ASI 与 `ue4ss/Mods/AC7UIAspect/`，还原备份文件与两份模组列表。
+退出游戏，删除以下文件与目录：
 
-> `Uninstall.cmd` 依赖 `Install.cmd` 生成的安装记录，手动安装请按手动备份卸载。
+- `AC7SceneProjection.asi`
+- `AC7HUDCenter.asi`
+- `AC7SceneProjection.log`、`AC7HUDCenter.log`（若存在）
+- `ue4ss/Mods/AC7UIAspect/`
+
+再从 `ue4ss/Mods/mods.txt` 与 `ue4ss/Mods/mods.json` 中删除 `AC7UIAspect` 条目。
+
+外部依赖若仍被其他模组使用则无需删除。
 
 ## 从源码构建
 
