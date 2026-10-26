@@ -50,13 +50,13 @@
                   },
                   {
                       "path":  "README.md",
-                      "bytes":  3693,
-                      "sha256":  "E2444371B65DBCCEA925D3C78196CB9758ECAB31F94EF357A5797C01E68CE8CF"
+                      "bytes":  3923,
+                      "sha256":  "314C17F92F8A6159B1F71B34EAEF8004B20B120E093509F9EAD71DA0D8C81188"
                   },
                   {
                       "path":  "README_zh.md",
-                      "bytes":  3683,
-                      "sha256":  "B65D4C24727A626EAD4EE173D8167F59F2C70F86D7C63EBBB0E9245BA1D1B228"
+                      "bytes":  3588,
+                      "sha256":  "BC7A99591C816250C5875BC4DD97EA1A9E7EE057EF77C19DA047A93CCA45B9B7"
                   },
                   {
                       "path":  "scripts/Common.ps1",

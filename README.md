@@ -6,12 +6,13 @@ Expands the 3D field of view for *Ace Combat 7* at ultrawide resolutions and cor
 
 Choose either **script install** (`Install.cmd`) or **manual install**; both place the same files into the game.
 
-## What the fix covers
+## How it works
 
-- **3D**: horizontal FOV expanded to the actual viewport.
-- **HUD**: original shader kept, horizontal offset corrected.
+- **3D view**: camera projection adjusted to the actual viewport aspect ratio, widening horizontal FOV while keeping vertical FOV, so ultrawide screens show more of the scene at the sides.
+- **HUD**: horizontal sampling position in the original HUD shader adjusted to center the HUD, keeping text and graphic proportions.
+- **UI layout**: scripts adjust the final canvas of subtitles, confirmation dialogs and loading screens as they are created and swapped, centering them at 16:9.
 
-3D and UI scale with the viewport and are not tied to a fixed resolution; the HUD uses the primary monitor's aspect ratio at launch.
+All fixes apply at runtime and modify neither the game EXE nor game assets. 3D and UI scale with the viewport and are not tied to a fixed resolution; the HUD uses the primary monitor's aspect ratio at launch.
 
 ## Requirements
 
