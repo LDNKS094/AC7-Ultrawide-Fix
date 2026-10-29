@@ -3,6 +3,7 @@
 /.venv/
 /.local-state/
 /backups/
+/payload/
 /releases/
 __pycache__/
 *.log
