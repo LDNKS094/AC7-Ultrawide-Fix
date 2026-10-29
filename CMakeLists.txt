@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 cmake_policy(SET CMP0091 NEW)
-project(AC7UltrawideFix VERSION 1.2.3 LANGUAGES C CXX)
+project(AC7UltrawideFix VERSION 1.2.4 LANGUAGES C CXX)
 if(NOT WIN32 OR NOT MSVC OR NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
     message(FATAL_ERROR "Build with the x64 MSVC toolchain on Windows.")
 endif()

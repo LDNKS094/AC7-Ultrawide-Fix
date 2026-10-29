@@ -4,7 +4,11 @@ $root=Split-Path -Parent $PSScriptRoot
 . (Join-Path $PSScriptRoot 'Common.ps1')
 if(-not $OutputDirectory){$OutputDirectory=Join-Path $root 'releases'}
 New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
-$release=ConvertFrom-Json -InputObject ([IO.File]::ReadAllText((Join-Path $root 'release.json')))
+$cmake=[IO.File]::ReadAllText((Join-Path $root 'CMakeLists.txt'))
+if($cmake -notmatch '(?im)^\s*project\(AC7UltrawideFix\s+VERSION\s+(\d+\.\d+\.\d+(?:\.\d+)?)\s'){
+    throw 'Could not find the AC7UltrawideFix version in CMakeLists.txt.'
+}
+$version=$Matches[1]
 $stage=Join-Path ([IO.Path]::GetTempPath()) ('ac7-package-'+[guid]::NewGuid().ToString('N'))
 try{
     New-Item -ItemType Directory -Path $stage -Force | Out-Null
@@ -22,7 +26,7 @@ try{
     foreach($name in @('AC7SceneProjection.asi','AC7HUDCenter.asi')){
         Copy-Item -LiteralPath (Join-Path $root ('payload\'+$name)) -Destination $native
     }
-    $archive=Join-Path $OutputDirectory ($release.package+'-'+$release.version+'.zip')
+    $archive=Join-Path $OutputDirectory ('AC7-Ultrawide-Fix-'+$version+'.zip')
     Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $archive -Force -CompressionLevel Optimal
     Write-AC7Utf8 ($archive+'.sha256') ((Get-AC7Hash $archive)+'  '+(Split-Path -Leaf $archive)+"`n")
     Write-Output "Package: $archive ($((Get-Item -LiteralPath $archive).Length) bytes)"
