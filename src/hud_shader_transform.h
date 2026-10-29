@@ -13,7 +13,7 @@ inline void Write32(std::vector<uint8_t>& data,size_t at,uint32_t value){std::me
 inline bool InstructionChunk(const uint8_t* p){return !std::memcmp(p,"SHEX",4)||!std::memcmp(p,"SHDR",4);}
 inline bool FindCoordinate(const std::string& source,uint32_t& reg,uint32_t& component){
     if(source.find("ps_5_0")==std::string::npos) return false;
-    static const std::regex aspect(R"(mul\s+r[0-9]+\.[xyzw],\s*cb1\[127\]\.y,\s*l\(1\.77777[0-9]*\))");
+    static const std::regex aspect(R"(mul\s+r[0-9]+\.[xyzw],\s*cb[01]\[127\]\.y,\s*l\(1\.77777[0-9]*\))");
     static const std::regex selection(R"(movc\s+r([0-9]{1,4})\.([xyzw]),)");
     std::smatch match;
     if(!std::regex_search(source,match,aspect)) return false;
