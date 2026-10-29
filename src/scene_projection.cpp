@@ -3,12 +3,10 @@
 #define NOMINMAX
 #include <windows.h>
 #include <MinHook.h>
-#include <atomic>
 #include <cstdint>
 #include <cstring>
 #include <fstream>
 #include <mutex>
-#include <sstream>
 #include <string>
 #include "scene_projection_math.h"
 
@@ -16,12 +14,12 @@ namespace {
 std::string root;
 std::ofstream output;
 std::mutex logMutex;
-std::atomic<unsigned> reports{0};
 using Project = void(__fastcall*)(void*, const uint8_t*, void*, void*);
 Project original = nullptr;
 
 void Log(const std::string& text) {
     std::lock_guard<std::mutex> lock(logMutex);
+    if (!output.is_open()) output.open(root + "AC7SceneProjection.log", std::ios::trunc);
     output << text << '\n' << std::flush;
 }
 
@@ -78,12 +76,6 @@ void __fastcall Projection(void* view, const uint8_t* axis, void* viewport, void
     const uint8_t maintainHorizontal = 1;
     original(view, &maintainHorizontal, viewport, data);
     // CameraFields restores the original camera data even when other consumers use it later.
-    if (reports.fetch_add(1, std::memory_order_relaxed) < 4) {
-        std::ostringstream message;
-        message << "3D projection: " << width << 'x' << height << " FOV " << saved.fov << " -> " << fov
-                << " aspect " << saved.aspect << " -> " << aspect << "; camera fields restored on return";
-        Log(message.str());
-    }
 }
 
 bool Readable(const MEMORY_BASIC_INFORMATION& memory) {
@@ -133,8 +125,6 @@ uint8_t* FindProjection() {
 }
 
 DWORD WINAPI Main(LPVOID) {
-    output.open(root + "AC7SceneProjection.log", std::ios::trunc);
-    Log("Unified per-call perspective projection; no scene polling, shader replacements or global FOV patches");
     Sleep(1000);
     uint8_t* target = nullptr;
     for (unsigned retry = 0; retry < 20 && !target; ++retry) {
@@ -146,7 +136,6 @@ DWORD WINAPI Main(LPVOID) {
         Log("Projection hook creation failed; all views remain stock"); return 0;
     }
     if (MH_EnableHook(target) != MH_OK) { Log("Projection hook enable failed; all views remain stock"); return 0; }
-    Log("Projection hook installed; perspective views use their actual viewport; no UE4SS scene state required");
     return 0;
 }
 }
