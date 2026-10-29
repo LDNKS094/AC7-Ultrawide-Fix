@@ -9,7 +9,7 @@ $stage=Join-Path ([IO.Path]::GetTempPath()) ('ac7-package-'+[guid]::NewGuid().To
 try{
     New-Item -ItemType Directory -Path $stage -Force | Out-Null
     # Installation files only.
-    foreach($name in @('README.md','README_zh.md','Install.cmd','Uninstall.cmd','mod','licenses')){
+    foreach($name in @('LICENSE','README.md','README_zh.md','Install.cmd','Uninstall.cmd','mod','licenses')){
         Copy-Item -LiteralPath (Join-Path $root $name) -Destination $stage -Recurse
     }
     $tools=Join-Path $stage 'scripts'

@@ -122,3 +122,7 @@ payload/
 ```
 
 Once built, install the patch as usual.
+
+## License
+
+This project is licensed under the [GNU General Public License v3.0](LICENSE). Bundled third-party components keep their own licenses in [`licenses/`](licenses/).
